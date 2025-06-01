@@ -1,0 +1,76 @@
+.form {
+  padding: 2rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #cfe7ff, #eaf4ff);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
+}
+
+.form input[type="file"] {
+  cursor: pointer;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.375rem;
+  background-color: #f8f9fa;
+  font-size: 0.875rem;
+  transition: border-color 0.2s;
+}
+
+.form input[type="file"]:hover {
+  border-color: #007aff;
+}
+
+.form button {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  background-color: #007aff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-geist-sans);
+  transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+  background-color: #005fcc;
+}
+
+.form button:active:enabled {
+  background-color: #004bb5;
+}
+
+.form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progressBar {
+  position: relative;
+  width: 100%;
+  min-width: 280px;
+  height: 20px;
+  background-color: #c3c3c3;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #5193ff;
+  transition: width 0.3s ease;
+}
