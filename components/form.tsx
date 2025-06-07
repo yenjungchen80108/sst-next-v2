@@ -16,7 +16,7 @@ export default function Form({ url }: { url: string }) {
         const file = fileInput.files?.[0] ?? null;
         if (!file) return;
 
-        // 檔案大小驗證（例如：限制 5MB）
+        // 檔案大小驗證（例如：限制 1MB）
         const maxSize = 1 * 1024 * 1024;
         if (file.size > maxSize) {
           alert("File is too large. Max 1MB allowed.");
@@ -44,8 +44,11 @@ export default function Form({ url }: { url: string }) {
         xhr.onload = () => {
           if (xhr.status >= 200 && xhr.status < 300) {
             window.open(url.split("?")[0], "_blank");
+          } else if (xhr.status === 403 || xhr.status === 400) {
+            alert("URL 已失效，請重新整理頁面以取得新的上傳連結");
           } else {
-            alert("Upload failed");
+            alert("上傳失敗，請稍後再試");
+            console.error("Upload failed", xhr);
           }
         };
 
