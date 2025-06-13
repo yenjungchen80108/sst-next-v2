@@ -1,19 +1,20 @@
 import http from "k6/http";
-import { check, sleep } from "k6";
+import { check } from "k6";
 
 export const options = {
-  vus: 1, // 同時只有 1 個使用者
-  duration: "10s", // 測試持續 10 秒
+  stages: Array.from({ length: 20 }, (_, i) => ({
+    duration: "30s",
+    target: (i + 1) * 5, // 5, 10, ..., 100 VUs
+  })),
   thresholds: {
-    http_req_failed: ["rate<0.1"], // 錯誤率低於 10%
-    http_req_duration: ["p(95)<1000"], // 95% 請求低於 1000ms
+    http_req_failed: ["rate<0.01"], // 失敗率小於 1%
+    http_req_duration: ["p(95)<1500"], // 95% 請求低於 1500ms
   },
 };
 
 export default function () {
-  const res = http.get("https://sst-next-v2.vercel.app/");
+  const res = http.get("https://sst-next-v2.vercel.app/", { timeout: "10s" }); // 10 秒超時
   check(res, {
     "狀態碼為 200": (r) => r.status === 200,
   });
-  sleep(1);
 }
